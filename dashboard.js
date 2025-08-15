@@ -5,11 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const firebaseConfig = {
         apiKey: "AIzaSyClh1yCsCpoQtLOBlXenYbot4BazZwUxq8",
         authDomain: "monitoramento-de-rede-ifpruv.firebaseapp.com",
-        projectId: "monitoramento-de-rede-ifpruv",
-        storageBucket: "monitoramento-de-rede-ifpruv.appspot.com",
-        messagingSenderId: "397380019537",
-        appId: "1:397380019537:web:5b58d725232965849a5f70"
-    };
+      databaseURL: "https://monitoramento-de-rede-ifpruv-default-rtdb.firebaseio.com",
+      projectId: "monitoramento-de-rede-ifpruv",
+      storageBucket: "monitoramento-de-rede-ifpruv.firebasestorage.app",
+      messagingSenderId: "397380019537",
+      appId: "1:397380019537:web:5b58d725232965849a5f70"
+};
 
     // --- INICIALIZAÇÃO DO FIREBASE ---
     try {
@@ -230,4 +231,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZAÇÃO ---
     listenForDeviceStatus();
+
 });
