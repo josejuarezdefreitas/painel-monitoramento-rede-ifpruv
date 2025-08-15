@@ -33,7 +33,7 @@ Certifique-se de ativar o Firebase Realtime Database e configurar as regras para
 {
   "rules": {
     ".read": true,
-    ".write": true
+    ".write": "auth != null"
   }
 }
 ```
