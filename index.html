@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFPR - Painel de Monitoramento de Rede</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+		<img src="C:\dev\monitoramentodaredeifpruv\IFPR.png" alt="Logo IFPR" class="logo-ifpr">
+        <h1>IFPR - Campus União da Vitória</h1>
+        <h2>Painel de Monitoramento de Rede</h2>
+        
+        <div id="auth-container">
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <div id="user-info" style="display: none;">
+                <p>Logado como: <span id="user-email"></span></p>
+                <button id="logout-btn">Sair</button>
+                <button id="add-device-btn" class="header-button">Adicionar Equipamento</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="dashboard-grid"></main>
+
+    <div id="history-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <h2 id="history-modal-title">Histórico do Dispositivo</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3>Uptime (24h)</h3>
+                    <p id="stat-uptime">--%</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Latência Média</h3>
+                    <p id="stat-avg-latency">-- ms</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Latência Máxima</h3>
+                    <p id="stat-max-latency">-- ms</p>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="history-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <h2 id="device-form-title">Adicionar Novo Equipamento</h2>
+            <form id="device-form">
+                <input type="hidden" id="device-id">
+                <div class="form-group">
+                    <label for="device-nome">Nome do Equipamento:</label>
+                    <input type="text" id="device-nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="device-ip">Endereço IP:</label>
+                    <input type="text" id="device-ip" name="ip" required>
+                </div>
+                <div class="form-group">
+                    <label for="device-mac">Endereço MAC:</label>
+                    <input type="text" id="device-mac" name="mac">
+                </div>
+                <div class="form-group">
+                    <label for="device-url">URL de Acesso:</label>
+                    <input type="url" id="device-url" name="url">
+                </div>
+                <div class="form-group">
+                    <label for="device-imagem_url">URL da Imagem:</label>
+                    <input type="url" id="device-imagem_url" name="imagem_url">
+                </div>
+                <button type="submit" class="form-submit-btn">Salvar Equipamento</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="dashboard.js"></script>
+
+</body>
+</html>
