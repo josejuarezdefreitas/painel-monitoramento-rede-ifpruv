@@ -1,0 +1,9 @@
+# Arquivos de segredo e configuração
+serviceAccountKey.json
+*.env
+
+# Arquivos de log
+*.log
+
+# Arquivos gerados pelo Python
+__pycache__/
