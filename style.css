@@ -112,23 +112,28 @@ main {
     padding: 20px;
 }
 
+/* --- MUDANÇAS PRINCIPAIS AQUI --- */
+
+#dashboard-grid {
+    display: grid;
+    /* Cards um pouco mais estreitos para caberem mais na tela */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px; /* Espaçamento menor */
+}
+
 .group-title {
+    /* Faz o título ocupar todas as colunas da grade */
+    grid-column: 1 / -1;
     margin-top: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--primary-color);
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: 1.3rem; /* Fonte um pouco menor */
     font-weight: 500;
 }
 .group-title:first-child {
     margin-top: 0;
-}
-
-#dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
 }
 
 .device-card {
@@ -140,6 +145,7 @@ main {
     transition: box-shadow 0.2s ease-in-out;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     position: relative;
+    /* A altura será automática para ser mais compacto */
 }
 .device-card:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -147,9 +153,9 @@ main {
 
 .card-image {
     width: 100%;
-    height: 120px;
+    height: 80px; /* Imagem menor para economizar espaço */
     object-fit: contain;
-    padding: 10px;
+    padding: 5px;
     box-sizing: border-box;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -159,18 +165,18 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 8px 12px; /* Padding menor */
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
 }
 .device-name {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Fonte menor */
     font-weight: bold;
     color: var(--text-color);
 }
 .status-indicator {
-    width: 15px;
-    height: 15px;
+    width: 12px; /* Indicador menor */
+    height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
 }
@@ -178,11 +184,11 @@ main {
 .status-indicator.offline { background-color: var(--status-offline); }
 
 .card-body {
-    padding: 15px;
+    padding: 12px; /* Padding menor */
 }
 .card-body p {
-    margin: 8px 0;
-    font-size: 0.9rem;
+    margin: 5px 0; /* Margem menor */
+    font-size: 0.8rem; /* Fonte menor */
     color: var(--text-muted);
 }
 .card-body span {
@@ -192,21 +198,21 @@ main {
 
 .card-footer {
     margin-top: auto;
-    padding: 15px;
+    padding: 10px 12px; /* Padding menor */
     border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 10px;
+    gap: 8px; /* Gap menor */
 }
 
 .access-button, .edit-btn-footer {
     color: white;
-    padding: 8px 15px;
+    padding: 6px 12px; /* Botões menores */
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.8rem; /* Fonte menor */
     transition: background-color 0.2s;
     border: none;
     cursor: pointer;
@@ -218,18 +224,18 @@ main {
 
 .card-actions {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
     z-index: 2;
 }
 .delete-btn {
     background: rgba(255,255,255,0.8);
     border: 1px solid var(--border-color);
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 24px; /* Botão menor */
+    height: 24px;
     color: var(--text-muted);
-    font-size: 1rem;
+    font-size: 0.9rem; /* Fonte menor */
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
@@ -238,126 +244,13 @@ main {
 }
 .delete-btn:hover { color: var(--status-offline); border-color: var(--status-offline); background-color: #fff; }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+/* O resto dos estilos (modais, etc.) permanecem os mesmos */
+.modal-overlay, .modal-content, .modal-close-btn, .stats-grid, .stat-box, .chart-container, .form-group, .form-group label, .form-group input, .form-submit-btn, .form-submit-btn:disabled {
+    /* Cole os estilos existentes de modais e formulários aqui, pois eles não precisam de alteração */
 }
 
-.modal-overlay.visible {
-    display: flex;
-    opacity: 1;
-}
-
-.modal-content {
-    background: var(--card-bg);
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-    width: 90%;
-    max-width: 800px;
-    position: relative;
-    color: var(--text-color);
-}
-
-.modal-close-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 2.5rem;
-    color: var(--text-muted);
-    cursor: pointer;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-weight: 300;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.stat-box {
-    background-color: var(--bg-color);
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.stat-box h3 {
-    margin: 0 0 10px 0;
-    font-size: 0.9rem;
-    font-weight: normal;
-    color: var(--text-muted);
-    text-transform: uppercase;
-}
-
-.stat-box p {
-    margin: 0;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-.chart-container {
-    width: 100%;
-    margin-top: 20px;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: var(--text-muted);
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    background-color: #f0f2f5;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    color: var(--text-color);
-    box-sizing: border-box;
-}
-
-.form-submit-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: var(--status-online);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.form-submit-btn:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
+/* Cole-os aqui se precisar: */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:1000;opacity:0;transition:opacity .3s ease}.modal-overlay.visible{display:flex;opacity:1}.modal-content{background:var(--card-bg);padding:25px;border-radius:10px;border:1px solid var(--border-color);width:90%;max-width:800px;position:relative;color:var(--text-color)}.modal-close-btn{position:absolute;top:10px;right:20px;background:0 0;border:none;font-size:2.5rem;color:var(--text-muted);cursor:pointer}.modal-content h2{margin-top:0;margin-bottom:20px;font-weight:300}.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-bottom:20px}.stat-box{background-color:var(--bg-color);padding:15px;border-radius:8px;text-align:center}.stat-box h3{margin:0 0 10px;font-size:.9rem;font-weight:400;color:var(--text-muted);text-transform:uppercase}.stat-box p{margin:0;font-size:1.8rem;font-weight:700;color:var(--text-color)}.chart-container{width:100%;margin-top:20px}.form-group{margin-bottom:1rem}.form-group label{display:block;margin-bottom:5px;color:var(--text-muted)}.form-group input{width:100%;padding:10px;background-color:#f0f2f5;border:1px solid var(--border-color);border-radius:5px;color:var(--text-color);box-sizing:border-box}.form-submit-btn{width:100%;padding:12px;font-size:1rem;font-weight:700;background-color:var(--status-online);color:#fff;border:none;border-radius:5px;cursor:pointer;margin-top:10px}.form-submit-btn:disabled{background-color:#555;cursor:not-allowed;opacity:.7}
 
 /* Esconde botões de ação por padrão */
 .card-actions, #add-device-btn { display: none; }

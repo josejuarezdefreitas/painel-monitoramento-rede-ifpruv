@@ -90,78 +90,76 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- FUNÇÃO PRINCIPAL DE RENDERIZAÇÃO ---
-    function renderDashboard(statuses, searchTerm = '') {
-        dashboardGrid.innerHTML = '';
-        
-        let filteredDevices = Object.entries(statuses);
+    // --- FUNÇÃO PRINCIPAL DE RENDERIZAÇÃO (MODIFICADA) ---
+function renderDashboard(statuses, searchTerm = '') {
+    dashboardGrid.innerHTML = ''; // Limpa a grade principal
+    
+    let filteredDevices = Object.entries(statuses);
 
-        if (searchTerm) {
-            filteredDevices = filteredDevices.filter(([id, device]) => {
-                return device.nome.toLowerCase().includes(searchTerm) || 
-                       (device.ip && device.ip.toLowerCase().includes(searchTerm));
-            });
-        }
-
-        if (filteredDevices.length === 0) {
-            dashboardGrid.innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: var(--text-muted);">Nenhum equipamento encontrado.</p>';
-            return;
-        }
-
-        const groupedDevices = filteredDevices.reduce((acc, [id, device]) => {
-            const group = device.group || 'Outros';
-            if (!acc[group]) {
-                acc[group] = [];
-            }
-            acc[group].push([id, device]);
-            return acc;
-        }, {});
-
-        Object.keys(groupedDevices).sort().forEach(groupName => {
-            const devicesInGroup = groupedDevices[groupName];
-
-            const groupTitle = document.createElement('h2');
-            groupTitle.className = 'group-title';
-            groupTitle.textContent = groupName;
-            dashboardGrid.appendChild(groupTitle);
-
-            const groupGrid = document.createElement('div');
-            groupGrid.style.display = 'grid';
-            groupGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
-            groupGrid.style.gap = '20px';
-
-            devicesInGroup.sort(([, a], [, b]) => a.nome.localeCompare(b.nome));
-
-            devicesInGroup.forEach(([deviceId, device]) => {
-                const statusClass = device.online ? 'online' : 'offline';
-                const card = document.createElement('div');
-                card.className = 'device-card';
-                card.dataset.deviceId = deviceId;
-
-                card.innerHTML = `
-                    <div class="card-actions">
-                        <button class="delete-btn" title="Excluir Dispositivo">×</button>
-                    </div>
-                    <img class="card-image" src="${device.imagem_url || 'https://i.imgur.com/8QMMGba.png'}" alt="Imagem do ${device.nome}" onerror="this.onerror=null;this.src='https://i.imgur.com/8QMMGba.png';">
-                    <div class="card-header">
-                        <h2 class="device-name">${device.nome}</h2>
-                        <div class="status-indicator ${statusClass}"></div>
-                    </div>
-                    <div class="card-body">
-                        <p>IP: <span>${device.ip || 'N/A'}</span></p>
-                        <p>MAC: <span>${device.mac || 'N/A'}</span></p>
-                        <p>Status: <span class="${statusClass}">${device.online ? 'Online' : 'Offline'}</span></p>
-                        <p>Latência: <span>${device.latency != null && device.online ? (device.latency.toFixed(2) + ' ms') : 'N/A'}</span></p>
-                    </div>
-                    <div class="card-footer">
-                        <button class="edit-btn-footer" title="Editar Dispositivo">Editar</button>
-                        <a href="${device.url || '#'}" class="access-button" target="_blank" rel="noopener noreferrer">Acessar</a>
-                    </div>
-                `;
-                groupGrid.appendChild(card);
-            });
-            dashboardGrid.appendChild(groupGrid);
+    if (searchTerm) {
+        filteredDevices = filteredDevices.filter(([id, device]) => {
+            return device.nome.toLowerCase().includes(searchTerm) || 
+                   (device.ip && device.ip.toLowerCase().includes(searchTerm));
         });
     }
+
+    if (filteredDevices.length === 0) {
+        dashboardGrid.innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: var(--text-muted);">Nenhum equipamento encontrado.</p>';
+        return;
+    }
+
+    // Agrupar dispositivos
+    const groupedDevices = filteredDevices.reduce((acc, [id, device]) => {
+        const group = device.group || 'Outros';
+        if (!acc[group]) {
+            acc[group] = [];
+        }
+        acc[group].push([id, device]);
+        return acc;
+    }, {});
+
+    // Ordenar grupos e renderizar
+    Object.keys(groupedDevices).sort().forEach(groupName => {
+        const devicesInGroup = groupedDevices[groupName];
+
+        // Adicionar título do grupo DIRETAMENTE na grade principal
+        const groupTitle = document.createElement('h2');
+        groupTitle.className = 'group-title';
+        groupTitle.textContent = groupName;
+        dashboardGrid.appendChild(groupTitle);
+
+        devicesInGroup.sort(([, a], [, b]) => a.nome.localeCompare(b.nome));
+
+        devicesInGroup.forEach(([deviceId, device]) => {
+            const statusClass = device.online ? 'online' : 'offline';
+            const card = document.createElement('div');
+            card.className = 'device-card';
+            card.dataset.deviceId = deviceId;
+
+            card.innerHTML = `
+                <div class="card-actions">
+                    <button class="delete-btn" title="Excluir Dispositivo">×</button>
+                </div>
+                <img class="card-image" src="${device.imagem_url || 'https://i.imgur.com/8QMMGba.png'}" alt="Imagem do ${device.nome}" onerror="this.onerror=null;this.src='https://i.imgur.com/8QMMGba.png';">
+                <div class="card-header">
+                    <h2 class="device-name">${device.nome}</h2>
+                    <div class="status-indicator ${statusClass}"></div>
+                </div>
+                <div class="card-body">
+                    <p>IP: <span>${device.ip || 'N/A'}</span></p>
+                    <p>MAC: <span>${device.mac || 'N/A'}</span></p>
+                    <p>Status: <span class="${statusClass}">${device.online ? 'Online' : 'Offline'}</span></p>
+                </div>
+                <div class="card-footer">
+                    <button class="edit-btn-footer" title="Editar Dispositivo">Editar</button>
+                    <a href="${device.url || '#'}" class="access-button" target="_blank" rel="noopener noreferrer">Acessar</a>
+                </div>
+            `;
+            // Adicionar o card DIRETAMENTE na grade principal
+            dashboardGrid.appendChild(card);
+        });
+    });
+}
 
     // --- FUNÇÃO PARA CARREGAR E RENDERIZAR HISTÓRICO ---
     function showHistoryModal(deviceId) {
