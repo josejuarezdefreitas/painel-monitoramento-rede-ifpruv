@@ -32,30 +32,6 @@
         "imagem_url": "https://i.imgur.com/h9p2g85.png"
     },
     {
-        "id": "impressora_biblioteca",
-        "nome": "Impressora - Biblioteca",
-        "ip": "192.168.1.151",
-        "mac": "F1:E2:D3:C4:B5:A7",
-        "url": "http://192.168.1.151",
-        "imagem_url": "https://i.imgur.com/h9p2g85.png"
-    },
-    {
-        "id": "ap_ginasio",
-        "nome": "Access Point - Ginásio",
-        "ip": "192.168.1.201",
-        "mac": "AB:BC:CD:DE:EF:F1",
-        "url": "http://192.168.1.201",
-        "imagem_url": "https://i.imgur.com/YgLg2k9.png"
-    },
-    {
-        "id": "ap_auditorio",
-        "nome": "Access Point - Auditório",
-        "ip": "192.168.1.202",
-        "mac": "AB:BC:CD:DE:EF:F2",
-        "url": "http://192.168.1.202",
-        "imagem_url": "https://i.imgur.com/YgLg2k9.png"
-    },
-    {
         "id": "firewall_borda",
         "nome": "Firewall de Borda",
         "ip": "192.168.1.254",
