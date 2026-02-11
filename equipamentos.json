@@ -40,14 +40,6 @@
         "imagem_url": "https://i.imgur.com/h9p2g85.png"
     },
     {
-        "id": "ap_biblioteca",
-        "nome": "Access Point - Biblioteca",
-        "ip": "192.168.1.200",
-        "mac": "AB:BC:CD:DE:EF:F0",
-        "url": "http://192.168.1.200",
-        "imagem_url": "https://i.imgur.com/YgLg2k9.png"
-    },
-    {
         "id": "ap_ginasio",
         "nome": "Access Point - Ginásio",
         "ip": "192.168.1.201",
@@ -71,20 +63,5 @@
         "url": "http://192.168.1.254",
         "imagem_url": "https://i.imgur.com/gD5n4bB.png"
     },
-    {
-        "id": "nobreak_datacenter",
-        "nome": "IMPRESSORA XEROX",
-        "ip": "10.10.40.12",
-        "mac": "N0:",
-        "url": "",
-        "imagem_url": ""
-    },
-    {
-        "nome": "impressora HP",
-        "ip": "10.10.40.11",
-        "mac": "",
-        "url": "http://10.10.40.11/home/index.html#hashHome",
-        "imagem_url": "",
-        "id": "dev_1752785258720"
     }
 ]
